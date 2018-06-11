@@ -6,21 +6,26 @@ var size_block  = 20; // in px
 
 
 var map = [
-    [48,8],
-    [8,68],
-    [8,48]
+    [48,8, "stone"],[68,8, "water"],
+    [8,68, "stone"],
+    [8,48, "stone"]
 ];
 
 var block = {
-    over : function (top,left) {
+    over : function (top,left,type) {
 
         for (i = 0; i < map.length; i++) {
             if (map[i][0] == left && map[i][1] == top) {
+                this.onIn();
                 return true;
             }
         }
         return false;
+    },
+    onIn : function () {
+
     }
+
 }
 
 function placeBox(top,left) {
@@ -45,7 +50,6 @@ function placeBox(top,left) {
 }
 
 $( "body" ).on( "keydown", function( event ) {
-    // console.log(event.type + ": " +  event.which );
     if (event.which == 37) { //lewa strzalka
         placeBox(0,-1);
     }
@@ -60,19 +64,12 @@ $( "body" ).on( "keydown", function( event ) {
     }
 });
 
-
-
 function generateMap(map) {
-
     var i;
-    var block_stone = "<div class=\"stone\"></div>";
-    // var d           = document.getElementById("area");
-
     for (i = 0; i < map.length; i++) {
-        var b = $(block_stone).css({top : map[i][1], left : map[i][0]});
-
-        $('#area').append(b.prop("outerHTML"));
+        var box_block   = "<div class=\" block "+map[i][2]+"\"></div>";
+        var b           = $(box_block).css({top : map[i][1], left : map[i][0]});
+        $('#area').append( b.prop("outerHTML") );
     }
-
 }
 generateMap(map)
