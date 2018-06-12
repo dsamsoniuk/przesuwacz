@@ -1,14 +1,16 @@
 
 
-var box         = "square";
-var jump        = 20;
-var size_block  = 20; // in px
-
+var box             = "square";
+var jump            = 20;
+var size_block      = 20; // in px
+var position_start  = [28,28]; // left, top
 
 var map = [
-    [48,8, "stone"],[68,8, "water"],
-    [8,68, "stone"],[108,8, "gold"],
-    [8,48, "stone"]
+    [8,8, "stone"],[28,8, "stone"],[48,8, "stone"],[68,8, "stone"],[88,8, "stone"],[108,8, "stone"],[128,8, "stone"],[148,8, "stone"],
+    [8,28, "stone"],[48,28, "water"],[68,28, "water"],[88,28, "gold"],[108,28, "gold"],
+    [8,48, "stone"],[48,8, "stone"],
+    [8,68, "stone"],[128,48, "water"],
+    [8,88, "stone"],[28,88, "stone"],[48,88, "stone"],[68,88, "stone"],[88,88, "stone"],[108,88, "stone"],[128,88, "stone"],[148,88, "stone"],
 ];
 
 var block = {
@@ -51,7 +53,7 @@ var block = {
         },
         gold : function(id) {
             $("#" + id).remove();
-            return { "info" : "Jestes w złocie", "res" : false, "score" : 1 };
+            return { "info" : "Znalazłeś monetę! Brawo!", "res" : false, "score" : 1 };
         },
     },
     setInfo  : function(txt){
@@ -101,7 +103,12 @@ $( "body" ).on( "keydown", function( event ) {
 });
 
 function generateMap(map) {
+
     var i;
+    var box = '<div id="square" style="left:'+position_start[0]+'px; top:'+position_start[1]+'px;"></div>';
+ 
+    $('body').append(box);
+
     for (i = 0; i < map.length; i++) {
         var id          = map[i][2] + "_" + i;
         var box_block   = "<div class=\" block " + map[i][2] + "\" id=\"" + id + "\"></div>";

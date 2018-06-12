@@ -4,9 +4,13 @@ body {
 }
 
 #square {
-    background-color: pink;
+    /* background-color: grey; */
+    background-image: url("../image/mouse.png");
+    background-repeat: no-repeat;
+    background-size: 20px 20px;    
     width: 20px;
     height: 20px;
+
     display: block;
     position: absolute;
 } 
@@ -15,14 +19,17 @@ body {
     position: absolute;
     bottom: 50;
     left: 0;
-    background-color: pink;
+    background-color: #a1bad8;
+    padding:5px;
+
 }
 
 #info {
     position: absolute;
     bottom: 0;
     left: 0;
-    background-color: grey;
+    background-color: #c0e6a3;
+    padding:5px;
 }
 
 .block {
@@ -42,7 +49,7 @@ body {
 .water {
     background-image: url("../image/wave.png");
     background-repeat: no-repeat;
-    background-size: 20px 20px;    
+    background-size: 25px 25px;    
 }
 .gold {
     background-image: url("../image/coin_gold.gif");
