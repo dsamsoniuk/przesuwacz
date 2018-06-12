@@ -6,12 +6,22 @@ var size_block      = 20; // in px
 var position_start  = [28,28]; // left, top
 
 var map = [
-    [8,8, "stone"],[28,8, "stone"],[48,8, "stone"],[68,8, "stone"],[88,8, "stone"],[108,8, "stone"],[128,8, "stone"],[148,8, "stone"],
-    [8,28, "stone"],[48,28, "water"],[68,28, "water"],[88,28, "gold"],[108,28, "gold"],
-    [8,48, "stone"],[48,8, "stone"],
-    [8,68, "stone"],[128,48, "water"],
-    [8,88, "stone"],[28,88, "stone"],[48,88, "stone"],[68,88, "stone"],[88,88, "stone"],[108,88, "stone"],[128,88, "stone"],[148,88, "stone"],
+    [8,8, "stone"],[28,8, "stone"],[48,8, "stone"],[68,8, "stone"],[88,8, "stone"],[108,8, "stone"],[128,8, "stone"],[148,8, "stone"],[168,8, "stone"],
+    [8,28, "stone"], [168,28, "stone"],
+    [8,48, "stone"],[168,48, "stone"],
+    [8,68, "stone"],[168,68, "stone"],
+    [8,88, "stone"],[28,88, "stone"],[48,88, "stone"],[68,88, "stone"],[88,88, "stone"],[108,88, "stone"],[128,88, "stone"],[148,88, "stone"],[168,88, "stone"],
 ];
+
+map = map.concat([
+    [48,28, "water"],[68,28, "water"],
+    [128,48, "water"],
+]);
+
+map = map.concat([
+    [88,28, "gold"],[108,28, "gold"],
+    [148,68, "gold"],[148,48, "gold"],
+]);
 
 var block = {
     over : function (top,left) {
