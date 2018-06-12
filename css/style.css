@@ -1,6 +1,6 @@
 
 body {
-    background-color: bisque;
+    /* background-color: bisque; */
 }
 
 #square {
@@ -11,16 +11,41 @@ body {
     position: absolute;
 } 
 
+#score_box {
+    position: absolute;
+    bottom: 50;
+    left: 0;
+    background-color: pink;
+}
+
+#info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: grey;
+}
+
 .block {
     width: 20px;
     height:20px;
     position: absolute;
     display: block;
 }
+
 .stone {
-    background-color: grey;
+    /* background-color: grey; */
+    background-image: url("../image/rock.jpg");
+    background-repeat: no-repeat;
+    background-size: 20px 20px;    
 }
 
 .water {
-    background-color: blue;
+    background-image: url("../image/wave.png");
+    background-repeat: no-repeat;
+    background-size: 20px 20px;    
+}
+.gold {
+    background-image: url("../image/coin_gold.gif");
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
 }
