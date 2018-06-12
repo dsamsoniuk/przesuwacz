@@ -3,39 +3,36 @@
 var box             = "square";
 var jump            = 20;
 var size_block      = 20; // in px
-var position_start  = [28,28]; // left, top
+var position_start  = [48,28]; // left, top
 
-var map = [
-    [8,8, "stone"],[28,8, "stone"],[48,8, "stone"],[68,8, "stone"],[88,8, "stone"],[108,8, "stone"],[128,8, "stone"],[148,8, "stone"],[168,8, "stone"],
-    [8,28, "stone"], [168,28, "stone"],
-    [8,48, "stone"],[168,48, "stone"],
-    [8,68, "stone"],[168,68, "stone"],
-    [8,88, "stone"],[28,88, "stone"],[48,88, "stone"],[68,88, "stone"],[88,88, "stone"],[108,88, "stone"],[128,88, "stone"],[148,88, "stone"],[168,88, "stone"],
-];
-
-map = map.concat([
-    [48,28, "water"],[68,28, "water"],
-    [128,48, "water"],
-]);
-
-map = map.concat([
-    [88,28, "gold"],[108,28, "gold"],
-    [148,68, "gold"],[148,48, "gold"],
-]);
+var map    = "";
+map    += "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSN";
+map    += "SEEEWWEGGGEEEEEEEEEEEEEEEEEEEEEEEEEEEEEGEESN";
+map    += "SEEEWWWWWWWEEEEEEEEEEEEEEEEEEEEEWWWWWWWWWWSN";
+map    += "SEEEEEEEEEWWWWWWWWWWWEEEEWWWWGGGGGGGGGEGEESN";
+map    += "SEEEEEEEEEEEEEEEEEESSEEEEEEEEWWWWWWWEEEGEESN";
+map    += "SEEEEEEEEEEEEEEEEEESSEEEEEEEEGGGGGGGGGEGEESN";
+map    += "SEEEEEEEEEEEEEEEEEEEEEEEEEEEEGGGGGGGGGEGEESN";
+map    += "SEEEEEEEEEEEEEEEEEEEEEEEEEEEEGGGGGGGGGEGEESN";
+map    += "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS";
+var gen_map     = [];
 
 var block = {
     over : function (top,left) {
 
-        for (i = 0; i < map.length; i++) {
-            if (map[i][0] == left && map[i][1] == top) {
-                var id      = map[i][2] + "_" + i;
-                var type    = map[i][2];
+        for (i = 0; i < gen_map.length; i++) {
+            if (gen_map[i][0] == left && gen_map[i][1] == top) {
+                var id      = gen_map[i][2] + "_" + i;
+                var type    = gen_map[i][2];
                 return this.onIn(id, type);
             }
         }
         return false;
     },
     onIn : function (id, type) {
+        if (type == "empty") {
+            return false;
+        }        
         if (type == "stone") {
             var result = this.source.stone(id);
             this.setInfo(result.info);
@@ -119,10 +116,39 @@ function generateMap(map) {
  
     $('body').append(box);
 
-    for (i = 0; i < map.length; i++) {
-        var id          = map[i][2] + "_" + i;
-        var box_block   = "<div class=\" block " + map[i][2] + "\" id=\"" + id + "\"></div>";
-        var b           = $(box_block).css({top : map[i][1], left : map[i][0]});
+    var map_parts   = map.split("N");
+    var x1          = 8;
+    var y1          = 8;
+
+    for (i=0; i < map_parts.length; i++) {
+        x1 = 8;
+        var row = map_parts[i].split('');
+
+        for (j=0; j < row.length; j++) {
+            var field   = row[j];
+                x1      += 20;
+            var type    = "";
+            if (field == "S") {
+                type = "stone";
+            }
+            if (field == "W") {
+                type = "water";
+            }
+            if (field == "E") {
+                type = "empty";
+            }
+            if (field == "G") {
+                type = "gold";
+            }
+            gen_map    = gen_map.concat([ [x1, y1, type] ]);
+        }
+        y1 += 20;
+    }
+console.log(gen_map)
+    for (i = 0; i < gen_map.length; i++) {
+        var id          = gen_map[i][2] + "_" + i;
+        var box_block   = "<div class=\" block " + gen_map[i][2] + "\" id=\"" + id + "\"></div>";
+        var b           = $(box_block).css({top : gen_map[i][1], left : gen_map[i][0]});
         $('#area').append( b.prop("outerHTML") );
     }
 }
